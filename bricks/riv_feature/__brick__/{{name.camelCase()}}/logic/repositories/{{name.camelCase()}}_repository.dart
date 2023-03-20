@@ -1,23 +1,20 @@
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/{{name.camelCase()}}_model.dart';
-import '{{name.camelCase()}}_repository_impl.dart';
+
+import 'http_{{name.camelCase()}}_repository.dart';
 
 
-/// Http implementation of the [{{name.pascalCase()}}Repository
-class Http{{name.pascalCase()}}Repository implements {{name.pascalCase()}}Repository {
-  /// Creates a new instance of [Http{{name.pascalCase()}}Repository]
-  Http{{name.pascalCase()}}Repository(this.httpService);
+final {{name.camelCase()}}RepositoryProvider = Provider<{{name.pascalCase()}}Repository>(
+  (ref) {
+    final httpService = ref.watch(httpServiceProvider);
+    return Http{{name.pascalCase()}}Repository(httpService);
+  },
+);
 
-  /// Http service used to access an Http client and make calls
-  final HttpService httpService;
+/// Home repository interface
+abstract class {{name.pascalCase()}}Repository {
+  // implement endpoint
+  String get endpoint;
 
-  @override
-  String get endpoint => '/{{name.camelCase()}}';
-
-  @override
-  Future<{{name.pascalCase()}}Model> get{{name.pascalCase()}}() async {
-    final responseData = await httpService.get(endpoint);
-    
-    return {{name.pascalCase()}}Model.fromJson(responseData);
-  }
+  Future<{{name.pascalCase()}}Model> get{{name.pascalCase()}}();
 }

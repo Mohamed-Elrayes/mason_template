@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/{{name.camelCase()}}_model.dart';
-import '../repositories/{{name.camelCase()}}_repository_impl.dart';
+import '../repositories/{{name.camelCase()}}_repository.dart';
 
 {{#useFutureProvider}}
   {{#useDispose}}
